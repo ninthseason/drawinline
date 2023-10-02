@@ -4,15 +4,15 @@ from lib import StrokeBuilder
 
 
 def image2stroke(img):
-    return StrokeBuilder().from_image(img)
+    return StrokeBuilder().from_image_m(img)
 
 
-def file2stroke(filename, resize=None):
-    return StrokeBuilder().from_image(cv2.imread(filename), resize=resize)
+def file2stroke(filename):
+    return StrokeBuilder().from_image_m(cv2.imread(filename))
 
 
 if __name__ == '__main__':
-    stroke = file2stroke("test.jpg", resize=(700, 700))
+    stroke = file2stroke("test.jpg")
     print(stroke)
     from matplotlib import pyplot as plt
 
