@@ -83,7 +83,7 @@ def app_draw(_):
     im = pil2cv(im)
     stroke = image2stroke(im)
     for t in [3, 2, 1]:
-        print(f"{t}...", end="")
+        print(f"{t}...", end="", flush=True)
         time.sleep(1)
     print("")
     try:
