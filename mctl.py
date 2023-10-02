@@ -55,7 +55,7 @@ if __name__ == '__main__':
     window_bias = (344, 448)
     from imgprocess import file2stroke
 
-    stroke = file2stroke(r"sb.png")
+    stroke = file2stroke(r"test.jpg")
     # print(stroke)
     # i = 0
     # while i < len(stroke):
