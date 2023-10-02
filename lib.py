@@ -119,8 +119,8 @@ class StrokeBuilder:
 
 
 
-def image_linearize(img, size=(3, 3), is_gray=False):
-    img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY) if not is_gray else img
+def image_linearize(img, threshold=200, size=(3, 3), is_gray=False):
+    img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) if not is_gray else img
     img_invert = 255 - img_gray
 
     shape = cv2.MORPH_RECT
@@ -129,7 +129,6 @@ def image_linearize(img, size=(3, 3), is_gray=False):
     min_image = cv2.erode(img_invert, kernel)
 
     linear_reduction = img_gray + min_image
-    threshold = 200
     img_bin = np.where(linear_reduction > threshold, 255, 0).astype("uint8")
     return img_bin
 
@@ -160,3 +159,7 @@ def area4(px, py, im_shape):
             i -= 1
         i += 1
     return area
+
+
+def pil2cv(img):
+    return cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
