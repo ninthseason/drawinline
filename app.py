@@ -99,7 +99,7 @@ def app_draw(_):
         time.sleep(1)
     print("")
     try:
-        draw_stroke(stroke, start_point, min=10)
+        draw_stroke(stroke, start_point, min=1)
     except pyautogui.FailSafeException:
         print_formatted_text(HTML("<red>Painting stop.</red>"))
 

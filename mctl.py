@@ -3,17 +3,20 @@ import pyautogui as ag
 import time
 
 ag.PAUSE = 0
+click_delay = 0.01
+move_delay = 0.001
 
 
 def draw_trajectory(trajectory):
     """你画我猜用"""
-    time.sleep(0.006)
     ag.moveTo(*trajectory[0])
     ag.mouseDown(button='left')
+    # time.sleep(click_delay)
     for i in trajectory[1:]:
         ag.moveTo(*i, duration=0)
-        time.sleep(0.0008)
+        time.sleep(move_delay)
     ag.mouseUp(button='left')
+    time.sleep(click_delay)
 
 
 def draw_trajectory_ms_painting(trajectory):
