@@ -23,8 +23,8 @@ class StrokeBuilder:
     def from_image(self, img, preprocess=True):
         """无回溯的深度优先"""
         if preprocess:
-            img_bin = image_linearize(img)
-            img_bin = image_linearize(img_bin, size=(2, 2), is_gray=True)
+            # 高斯滤波 + Candy 算子
+            img_bin = line_draft(img)
         else:
             img_bin = img
         # cv2.imwrite("result.jpg", img_bin)
@@ -52,8 +52,8 @@ class StrokeBuilder:
     def from_image_df(self, img, preprocess=True):
         """有回溯的深度优先"""
         if preprocess:
-            img_bin = image_linearize(img)
-            img_bin = image_linearize(img_bin, size=(2, 2), is_gray=True)
+            # 高斯滤波 + Candy 算子
+            img_bin = line_draft(img)
         else:
             img_bin = img
         # cv2.imwrite("result.jpg", img_bin)
@@ -75,11 +75,11 @@ class StrokeBuilder:
                 self.commit()
         return self.build()
 
-    def from_image_m(self, img, preprocess=True):
+    def from_image_m(self, img, preprocess=True, threshold1=150, threshold2=200):
         """m通路搜索"""
         if preprocess:
-            img_bin = image_linearize(img)
-            img_bin = image_linearize(img_bin, size=(2, 2), is_gray=True)
+            # 高斯滤波 + Candy 算子
+            img_bin = line_draft(img, threshold1, threshold2)
         else:
             img_bin = img
         cv2.imwrite("result.jpg", img_bin)
@@ -118,7 +118,7 @@ class StrokeBuilder:
         return self.build()
 
 
-
+# Legacy
 def image_linearize(img, threshold=200, size=(3, 3), is_gray=False):
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) if not is_gray else img
     img_invert = 255 - img_gray
@@ -131,6 +131,13 @@ def image_linearize(img, threshold=200, size=(3, 3), is_gray=False):
     linear_reduction = img_gray + min_image
     img_bin = np.where(linear_reduction > threshold, 255, 0).astype("uint8")
     return img_bin
+
+
+def line_draft(img, threshold1=30, threshold2=100):
+    im_deno = cv2.GaussianBlur(img, (5, 5), 0)
+    img_edge = cv2.Canny(im_deno, threshold1=threshold1, threshold2=threshold2)
+    img_edge = 255 - img_edge
+    return img_edge
 
 
 def area8(px, py, im_shape):

@@ -1,15 +1,18 @@
 import numpy as np
 import pyautogui as ag
+import time
 
-ag.PAUSE = 0.01
+ag.PAUSE = 0
 
 
 def draw_trajectory(trajectory):
     """你画我猜用"""
+    time.sleep(0.006)
     ag.moveTo(*trajectory[0])
     ag.mouseDown(button='left')
     for i in trajectory[1:]:
-        ag.moveTo(*i, duration=0.01)
+        ag.moveTo(*i, duration=0)
+        time.sleep(0.0008)
     ag.mouseUp(button='left')
 
 

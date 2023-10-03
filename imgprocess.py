@@ -3,12 +3,12 @@ import numpy as np
 from lib import StrokeBuilder
 
 
-def image2stroke(img):
-    return StrokeBuilder().from_image_m(img)
+def image2stroke(img, preprocess=True, threshold1=150, threshold2=200):
+    return StrokeBuilder().from_image_m(img, preprocess, threshold1, threshold2)
 
 
 def file2stroke(filename):
-    return StrokeBuilder().from_image_m(cv2.imread(filename))
+    return StrokeBuilder().from_image_m(cv2.imread(filename), preprocess=True, threshold1=150, threshold2=200)
 
 
 if __name__ == '__main__':
