@@ -62,10 +62,10 @@ def app_threshold1(text):
 def app_threshold2(text):
     global threshold2
     if len(text) == 1:
-        print_formatted_text(HTML(f"Now threshold1 is: <green>{threshold2}</green>"))
+        print_formatted_text(HTML(f"Now threshold2 is: <green>{threshold2}</green>"))
     else:
         threshold2 = int(text[1])
-        print_formatted_text(HTML(f"Threshold1 set to: <green>{threshold2}</green>"))
+        print_formatted_text(HTML(f"Threshold2 set to: <green>{threshold2}</green>"))
 
 
 def app_start_point(_):
