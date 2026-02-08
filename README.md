@@ -4,6 +4,10 @@
 >
 > 本程序仅作为数字图像处理的学习用途，无意破坏游戏乐趣
 
+> 对于其他游戏，本工具模拟的鼠标输出可能不会被读取，可尝试使用 [DrawInline2](https://github.com/ninthseason/drawinline2)
+> 
+> DrawInline2 使用 [Interception](https://github.com/oblitum/Interception) 实现驱动级的鼠标控制，适用于更多场景。
+
 三步玩转你画我猜：
 
 1. 线稿生成器
